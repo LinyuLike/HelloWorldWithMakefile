@@ -2,12 +2,6 @@ pipeline {
     agent any
 
     stages {
-        // stage('Checkout') {
-        //     steps {
-        //         // 从 GitHub 拉取代码
-        //         git branch: 'main', url: 'https://github.com/LinyuLike/HelloWorldWithMakefile.git'
-        //     }
-        // }
 
         stage('Build') {
             steps {
@@ -16,12 +10,22 @@ pipeline {
             }
         }
 
-        // stage('Test') {
-        //     steps {
-        //         // 运行测试（如果有）
-        //         sh 'make test'
-        //     }
-        // }
+        stage('Run and Verify') {
+            steps {
+                // 运行 main.exe 并捕获其输出
+                script {
+                    def output = sh(script: './main.exe', returnStdout: true).trim()
+                    echo "Output from main.exe: ${output}"
+
+                    // 检查输出是否符合预期
+                    if (output == "Hello, World!") {
+                        echo 'Output verification succeeded!'
+                    } else {
+                        error 'Output verification failed!'
+                    }
+                }
+            }
+        }
 
         stage('Clean') {
             steps {
