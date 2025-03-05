@@ -2,12 +2,12 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                // 从 GitHub 拉取代码
-                git 'https://github.com/LinyuLike/HelloWorldWithMakefile.git'
-            }
-        }
+        // stage('Checkout') {
+        //     steps {
+        //         // 从 GitHub 拉取代码
+        //         git branch: 'main', url: 'https://github.com/LinyuLike/HelloWorldWithMakefile.git'
+        //     }
+        // }
 
         stage('Build') {
             steps {
